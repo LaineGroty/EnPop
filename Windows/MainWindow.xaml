@@ -1,0 +1,50 @@
+﻿<Window x:Class="EnPop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EnPop"
+        mc:Ignorable="d"
+        Title="EnPop" x:Name="AppWindow" Height="130" Width="375" ResizeMode="NoResize" Closed="AppWindow_Closed">
+    <Window.Resources>
+        <ResourceDictionary Source="Styles.xaml"/>
+    </Window.Resources>
+    <Grid x:Name="AppGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.05*" MaxWidth="10"/>     
+            <ColumnDefinition Width="*"/>                       <!--1 Textblock-->
+            <ColumnDefinition Width="0.05*" MaxWidth="10"/>
+            <ColumnDefinition Width="2*"/>                      <!--3 Textbox-->
+            <ColumnDefinition Width="0.05*" MaxWidth="10"/>
+            <ColumnDefinition Width="*"/>                       <!--5 Button-->
+            <ColumnDefinition Width="0.05*" MaxWidth="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.05*" MaxHeight="10"/>
+            <RowDefinition Height="auto"/>
+            <!--1 File-->
+            <RowDefinition Height="0.05*" MaxHeight="10"/>
+            <RowDefinition Height="auto"/>
+            <!--3 Lender-->
+            <RowDefinition Height="0.05*" MaxHeight="10"/>
+            <RowDefinition Height="auto"/>
+            <!--5 Go-->
+            <RowDefinition Height="0.05*" MaxHeight="10"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="File location:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="3" Grid.Row="1" Style="{StaticResource placeHolder}" Tag="Enter file location" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="TextBox_File"/>
+        <Button Grid.Column="5" Grid.Row="1" Content="Browse" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Click="Browse_Click"/>
+        
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="Lender:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <ComboBox Grid.Column="3" Grid.Row="3" IsEditable="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="ComboBox_Lenders">
+            <ComboBoxItem Content="Caliber Home Loans" Tag="caliber" IsSelected="True"/>
+            <ComboBoxItem Content="Text file input" Tag="text"/>
+        </ComboBox>
+        <Button Grid.Column="5" Grid.Row="3" Content="Info" VerticalAlignment="Center" Width="60" Click="Info_Click"/>
+
+        <TextBlock Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center" Foreground="Red" x:Name="TextBlock_Invalid"/>
+        <Button Grid.Column="3" Grid.Row="5" Content="Go" HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="auto" Click="Go_Click" MouseLeave="Button_Go_MouseLeave" x:Name="Button_Go"/>
+        <Button Grid.Column="5" Grid.Row="5" Content="Custom Input" VerticalAlignment="Center" Width="80" Click="Advanced_Click"/>
+    </Grid>
+</Window>

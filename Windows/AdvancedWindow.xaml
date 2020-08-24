@@ -1,0 +1,58 @@
+﻿<Window x:Class="EnPop.AdvancedWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EnPop"
+        mc:Ignorable="d"
+        Title="Advanced options" x:Name="AdvWindow" Height="450" MinHeight="150" Width="475" MinWidth="460">
+    <Window.Resources>
+        <ResourceDictionary Source="Styles.xaml"/>
+    </Window.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
+                <TextBlock FontSize="16" Text="Load custom instructions"/>
+                <TextBlock TextWrapping="Wrap" Text="Load instructions from a file to use when the program runs. If the file does not exist, the default instruction set is used. To apply these changes, simply close this window after entering a valid file. This resets when the application is closed."/>
+                <DockPanel Margin="15" HorizontalAlignment="Stretch">
+                    <Button Content="Browse" Width="60" Click="Browse_Click" DockPanel.Dock="Left"/>
+                    <TextBox Style="{StaticResource placeHolder}" Tag="Enter file location" DockPanel.Dock="Left" x:Name="TextBox_File"/>
+                </DockPanel>
+                <Separator/>
+                
+                <TextBlock FontSize="16" Text="Create custom instructions"/>
+                <TextBlock TextWrapping="Wrap" Text="Click &quot;Start&quot; to start recording inputs. Click &quot;Stop&quot; when finished. Click &quot;Add click&quot; to add a click to the sequence. Click &quot;Add text&quot; to add a point where inputs are inserted. Pause between inputs for best results."/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Start" Style="{StaticResource InstructionButton}" Tag="StartGroup" x:Name="Button_Start" Click="Start_Click"/>
+                    <Button Content="Stop" Style="{StaticResource InstructionButton}" x:Name="Button_Stop" Click="Stop_Click" IsEnabled="False"/>
+                    <Button Content="Reset" Style="{StaticResource InstructionButton}" x:Name="Button_Reset" Click="Reset_Click" IsEnabled="False"/>
+                    <Button Content="Add click" Style="{StaticResource InstructionButton}" Tag="StartGroup" x:Name="Button_AddClick" Click="AddClick_Click"/>
+                    <Button Content="Add text" Style="{StaticResource InstructionButton}" x:Name="Button_AddText" Click="AddText_Click"/>
+                    <Button Content="Save" Style="{StaticResource InstructionButton}" Tag="StartGroup" x:Name="Button_Save" Click="Save_Click" IsEnabled="False"/>
+                </StackPanel>
+                <DataGrid ItemsSource="{Binding Source=formattedInstructions, UpdateSourceTrigger=PropertyChanged, Path=formattedInstructions, Mode=TwoWay}"
+                          VerticalScrollBarVisibility="Auto" HeadersVisibility="Column" HorizontalAlignment="Left" Visibility="Collapsed" AutoGenerateColumns="False" 
+                          CanUserAddRows="True" CanUserDeleteRows="True" CanUserResizeRows="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False"
+                          x:Name="DataGrid_Instructions">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Type" Binding="{Binding Type, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Key/X" Binding="{Binding X, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Y" Binding="{Binding Y, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                        <DataGridTemplateColumn Header="Set position" Visibility="Visible" Width="auto" x:Name="Column_Positions"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Window>
